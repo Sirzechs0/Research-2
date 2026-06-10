@@ -1,0 +1,17 @@
+# Ignore dependencies
+node_modules/
+backend/node_modules/
+
+# Environment files
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+
+# Misc
+*.log
