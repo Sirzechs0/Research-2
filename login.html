@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | PCSHS SMS</title>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            padding: 2rem;
+        }
+
+        .login-container {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 3rem 2.5rem;
+            max-width: 450px;
+            width: 100%;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header .logo-circle {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .login-header .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            margin: 0.5rem 0 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .login-header .tagline {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0 0 1.5rem;
+        }
+
+        .login-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 1rem 0 0;
+        }
+
+        .login-error {
+            background: #fee;
+            color: #c33;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            border: 1px solid #fcc;
+            display: none;
+        }
+
+        [data-theme="dark"] .login-error {
+            background: rgba(255, 100, 100, 0.2);
+            color: #ff6b6b;
+            border-color: rgba(255, 100, 100, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .form-input:focus {
+            border-color: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .login-btn:hover:not(:disabled) {
+            background: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        [data-theme="dark"] .login-btn {
+            background: #fff;
+            color: #000;
+        }
+
+        [data-theme="dark"] .login-btn:hover:not(:disabled) {
+            background: #e0e0e0;
+        }
+
+        .login-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="logo-circle">
+                    <img src="logo.png" alt="PCSHS Logo">
+                </div>
+                <h1>PCSHS</h1>
+                <p class="tagline">We Excel, We Serve, We Lead.</p>
+                <h2>Admin Login</h2>
+            </div>
+
+            <form id="login-form" class="login-form">
+                <div id="login-error" class="login-error"></div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        required 
+                        autocomplete="email"
+                        placeholder="admin@pcshs.edu.ph"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        required 
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                    >
+                </div>
+
+                <button type="submit" class="login-btn" id="login-btn">
+                    <span class="btn-text">Login</span>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p style="color: var(--text-secondary); font-size: 0.875rem;">Don't have an account? Contact the administrator.</p>
+                <a href="index.html" class="back-link">← Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth-client.js"></script>
+    <script>
+        // Check if already logged in
+        if (Auth.isLoggedIn()) {
+            window.location.href = Auth.isAdmin() ? 'admin.html' : 'index.html';
+        }
+
+        const loginForm = document.getElementById('login-form');
+        const errorDiv = document.getElementById('login-error');
+        const loginBtn = document.getElementById('login-btn');
+        const btnText = loginBtn.querySelector('.btn-text');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Show loading state
+            btnText.textContent = '⏳ Logging in...';
+            loginBtn.disabled = true;
+            errorDiv.style.display = 'none';
+            
+            // Attempt login
+            const result = await Auth.login(email, password);
+            
+            if (result.success) {
+                // Success - redirect
+                window.location.href = result.user.role === 'admin' ? 'admin.html' : 'index.html';
+            } else {
+                // Error - show message
+                errorDiv.textContent = result.message || 'Login failed. Please try again.';
+                errorDiv.style.display = 'block';
+                errorDiv.style.animation = 'shake 0.5s';
+                
+                // Reset button
+                btnText.textContent = 'Login';
+                loginBtn.disabled = false;
+                
+                setTimeout(() => {
+                    errorDiv.style.animation = '';
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>

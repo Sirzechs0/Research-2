@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sign Up | PCSHS SMS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <main class="main-content">
+      <div class="content-container">
+        <h2>Sign Up</h2>
+        <form id="signup-form" class="signup-form">
+          <label>Email</label>
+          <input type="email" id="signup-email" required />
+          <label>Full Name</label>
+          <input type="text" id="signup-name" required />
+          <label>Password</label>
+          <input type="password" id="signup-password" required />
+          <button type="submit" class="action-btn">Create account</button>
+        </form>
+        <div id="signup-message" aria-live="polite"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="api-service.js"></script>
+  <script>
+    const form = document.getElementById('signup-form');
+    const msg = document.getElementById('signup-message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.textContent = 'Creating account...';
+
+      const email = document.getElementById('signup-email').value;
+      const fullName = document.getElementById('signup-name').value;
+      const password = document.getElementById('signup-password').value;
+
+      const res = await Auth.register(email, password, fullName);
+      if (res.success) {
+        msg.textContent = 'Account created. Please wait for admin approval to log in.';
+        form.reset();
+      } else {
+        msg.textContent = res.message || 'Failed to create account.';
+      }
+    });
+  </script>
+</body>
+</html>

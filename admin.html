@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | PCSHS SMS</title>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <div class="logo-circle">
+                        <img src="logo.png" alt="PCSHS Logo">
+                    </div>
+                    <div class="brand-text">
+                        <h1>PCSHS</h1>
+                        <p class="tagline">We Excel, We Serve, We Lead.</p>
+                    </div>
+                </div>
+                
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link">Dashboard</a>
+                    <a href="attendance.html" class="nav-link">Attendance</a>
+                    <a href="announcements.html" class="nav-link">Announcements</a>
+                    <a href="lost-found.html" class="nav-link">Lost & Found</a>
+                    <a href="staff.html" class="nav-link">Staff</a>
+                    <a href="settings.html" class="nav-link">Settings</a>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="signup.html" class="signup-link">Sign Up</a>
+                    <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+                        <span class="theme-icon">◐</span>
+                    </button>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </header>
+
+        <nav class="mobile-nav" id="mobile-nav">
+            <a href="index.html" class="mobile-nav-link">Dashboard</a>
+            <a href="attendance.html" class="mobile-nav-link">Attendance</a>
+            <a href="announcements.html" class="mobile-nav-link">Announcements</a>
+            <a href="lost-found.html" class="mobile-nav-link">Lost & Found</a>
+            <a href="staff.html" class="mobile-nav-link">Staff</a>
+            <a href="settings.html" class="mobile-nav-link">Settings</a>
+            <a href="signup.html" class="mobile-nav-link">Sign Up</a>
+        </nav>
+
+        <main class="main-content">
+            <div class="content-container">
+                <div class="page-header">
+                    <h2 class="page-title">Admin Panel 🔐</h2>
+                    <p class="page-subtitle" id="welcome-message">Welcome back, Administrator!</p>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div class="stat-card" style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                        <h3 style="font-size: 1rem; color: var(--text-secondary); margin: 0 0 0.75rem;">Total Students</h3>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-primary);">246</div>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Grade 11 (7 sections)</p>
+                    </div>
+
+                    <div class="stat-card" style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">✓</div>
+                        <h3 style="font-size: 1rem; color: var(--text-secondary); margin: 0 0 0.75rem;">Attendance Rate</h3>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-primary);">95.5%</div>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">235 present today</p>
+                    </div>
+
+                    <div class="stat-card" style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📢</div>
+                        <h3 style="font-size: 1rem; color: var(--text-secondary); margin: 0 0 0.75rem;">Announcements</h3>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-primary);">10</div>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">3 important</p>
+                    </div>
+
+                    <div class="stat-card" style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                        <h3 style="font-size: 1rem; color: var(--text-secondary); margin: 0 0 0.75rem;">Lost & Found</h3>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-primary);">8</div>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">5 lost, 3 found</p>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <section style="margin-bottom: 3rem;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary);">Quick Actions</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+                        <a href="attendance.html" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem 1.5rem; text-decoration: none; color: var(--text-primary); transition: all 0.3s; border: 2px solid var(--border-color); display: block;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">✓</div>
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1.25rem;">Mark Attendance</h4>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">Record student attendance for today</p>
+                        </a>
+
+                        <a href="announcements.html" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem 1.5rem; text-decoration: none; color: var(--text-primary); transition: all 0.3s; border: 2px solid var(--border-color); display: block;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">📢</div>
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1.25rem;">Post Announcement</h4>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">Create a new school announcement</p>
+                        </a>
+
+                        <a href="lost-found.html" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem 1.5rem; text-decoration: none; color: var(--text-primary); transition: all 0.3s; border: 2px solid var(--border-color); display: block;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔍</div>
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1.25rem;">Manage Lost & Found</h4>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">Add or update lost & found items</p>
+                        </a>
+
+                        <a href="settings.html" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem 1.5rem; text-decoration: none; color: var(--text-primary); transition: all 0.3s; border: 2px solid var(--border-color); display: block;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚙️</div>
+                            <h4 style="margin: 0 0 0.5rem; font-size: 1.25rem;">System Settings</h4>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">Configure system preferences</p>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- System Info -->
+                <section>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary);">System Information</h3>
+                    <div style="background: var(--bg-secondary); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--border-color);">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div>
+                                <span style="color: var(--text-secondary); font-size: 0.875rem;">Version</span><br>
+                                <strong style="color: var(--text-primary);">SMS v2.0</strong>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-secondary); font-size: 0.875rem;">Last Updated</span><br>
+                                <strong style="color: var(--text-primary);">March 15, 2026</strong>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-secondary); font-size: 0.875rem;">Database Status</span><br>
+                                <strong style="color: var(--text-primary);">🟢 Connected</strong>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-secondary); font-size: 0.875rem;">Server Status</span><br>
+                                <strong style="color: var(--text-primary);">🟢 Online</strong>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Pasig City Science High School</h4>
+                    <p class="footer-tagline">We Excel, We Serve, We Lead.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>Address: [To be updated]</p>
+                    <p>Phone: 123-456-7890</p>
+                    <p>Email: info@pcshs.edu.ph</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Admissions</a>
+                    <a href="#">Academic Programs</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pasig City Science High School. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth-client.js"></script>
+    <script>
+        // Require admin authentication
+        Auth.requireAdmin().then(isAdmin => {
+            if (isAdmin) {
+                const user = Auth.getUser();
+                document.getElementById('welcome-message').textContent = 
+                    `Welcome back, ${user.fullName || user.email}!`;
+            }
+        });
+    </script>
+</body>
+</html>

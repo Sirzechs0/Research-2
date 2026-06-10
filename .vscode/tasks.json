@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Initialize Node.js Backend",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"init",
+				"-y"
+			],
+			"group": "build"
+		}
+	]
+}
